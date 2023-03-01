@@ -8,7 +8,7 @@ const http_1 = __importDefault(require("http"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const config_1 = require("./config/config");
 const logging_1 = __importDefault(require("./library/logging"));
-const user_1 = require("./routes/user");
+const user_1 = __importDefault(require("./routes/user"));
 const router = (0, express_1.default)();
 mongoose_1.default
     .connect(config_1.config.mongo.url, {
@@ -34,7 +34,7 @@ const startServer = () => {
     });
     router.use(express_1.default.json());
     //routes
-    router.use("/users", user_1.router);
+    router.use("/users", user_1.default);
     router.use((req, res, next) => {
         const error = new Error("not found");
         logging_1.default.err(error);
