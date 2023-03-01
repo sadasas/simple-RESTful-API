@@ -1,41 +1,46 @@
-import express from "express";
-import http from "http";
-import mongoose from "mongoose";
-import { config } from "./config/config.js";
-import Logging from "./library/logging.js";
-import { router as userRouter } from "./routes/user.js";
-const router = express();
-mongoose
-    .connect(config.mongo.url, {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const http_1 = __importDefault(require("http"));
+const mongoose_1 = __importDefault(require("mongoose"));
+const config_js_1 = require("./config/config.js");
+const logging_js_1 = __importDefault(require("./library/logging.js"));
+const user_js_1 = require("./routes/user.js");
+const router = (0, express_1.default)();
+mongoose_1.default
+    .connect(config_js_1.config.mongo.url, {
     retryWrites: true,
     w: "majority",
 })
     .then(() => {
-    Logging.info("connect");
+    logging_js_1.default.info("connect");
     startServer();
 })
     .catch((eror) => {
-    Logging.err("unable to connect");
+    logging_js_1.default.err("unable to connect");
 });
 const startServer = () => {
     router.use((req, res, next) => {
         ///log on request
-        Logging.info(`Incoming ::: Method:[${req.method}] ----url:[${req.url}] -----IP:[${req.socket.remoteAddress}]`);
+        logging_js_1.default.info(`Incoming ::: Method:[${req.method}] ----url:[${req.url}] -----IP:[${req.socket.remoteAddress}]`);
         ///log on response
         req.on("finish", () => {
-            Logging.info(`Incoming ::: Method:[${req.method}] ----url:[${req.url}] -----IP:[${req.socket.remoteAddress}] ------Status:[${req.statusCode}]`);
+            logging_js_1.default.info(`Incoming ::: Method:[${req.method}] ----url:[${req.url}] -----IP:[${req.socket.remoteAddress}] ------Status:[${req.statusCode}]`);
         });
         next();
     });
-    router.use(express.json());
+    router.use(express_1.default.json());
     //routes
-    router.use("/users", userRouter);
+    router.use("/users", user_js_1.router);
     router.use((req, res, next) => {
         const error = new Error("not found");
-        Logging.err(error);
+        logging_js_1.default.err(error);
         return res.status(404).json({ message: error.message });
     });
-    http
+    http_1.default
         .createServer(router)
-        .listen(config.server.port, () => Logging.info("server is running"));
+        .listen(config_js_1.config.server.port, () => logging_js_1.default.info("server is running"));
 };
