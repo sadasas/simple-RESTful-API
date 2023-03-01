@@ -2,9 +2,9 @@ import { error } from "console";
 import express from "express";
 import http from "http";
 import mongoose from "mongoose";
-import { config } from "./config/config.js";
-import Logging from "./library/logging.js";
-import { router as userRouter } from "./routes/user.js";
+import { config } from "./config/config";
+import Logging from "./library/logging";
+import { router as userRouter } from "./routes/user";
 
 const router = express();
 
