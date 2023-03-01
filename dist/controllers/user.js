@@ -26,3 +26,4 @@ const readUser = (req, res, next) => {
         .catch((error) => res.status(500).json({ error }));
 };
 exports.default = { createUser, readUser };
+//# sourceMappingURL=user.js.map

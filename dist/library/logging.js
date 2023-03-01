@@ -10,3 +10,4 @@ exports.default = Logging;
 Logging.info = (args) => console.log(chalk_1.default.blue(`[${new Date().toLocaleString()}][INFO]`), args);
 Logging.warn = (args) => console.log(chalk_1.default.yellow(`[${new Date().toLocaleString()}][WARNING]`), typeof args === "string" ? chalk_1.default.yellowBright : args);
 Logging.err = (args) => console.log(chalk_1.default.red(`[${new Date().toLocaleString()}][ERROR]`), typeof args === "string" ? chalk_1.default.redBright : args);
+//# sourceMappingURL=logging.js.map

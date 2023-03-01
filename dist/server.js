@@ -44,3 +44,4 @@ const startServer = () => {
         .createServer(router)
         .listen(config_js_1.config.server.port, () => logging_js_1.default.info("server is running"));
 };
+//# sourceMappingURL=server.js.map
