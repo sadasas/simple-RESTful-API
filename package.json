@@ -7,7 +7,7 @@
     "start": "ts-node ./src/server.ts",
     "build": "rimraf dist && tsc",
     "ts.check": "tsc --project tsconfig.json",
-    "add-build": "git add dist"
+    "nodemon": "rimraf dist && tsc && nodemon"
   },
   "author": "",
   "license": "ISC",
@@ -28,10 +28,5 @@
     "rimraf": "^4.1.2",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.5"
-  },
-  "pre-commit": [
-    "ts.check",
-    "build",
-    "add-build"
-  ]
+  }
 }

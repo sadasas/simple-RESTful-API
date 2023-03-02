@@ -1,18 +1,14 @@
 import { error } from "console";
 import express from "express";
 import http from "http";
-import mongoose from "mongoose";
-import { config } from "./config/config";
+import conn from "./db/conn";
 import Logging from "./library/logging";
 import userRouter from "./routes/user";
+import { config } from "./config/config";
 
 const router = express();
 
-mongoose
-  .connect(config.mongo.url, {
-    retryWrites: true,
-    w: "majority",
-  })
+conn
   .then(() => {
     Logging.info("connect");
     startServer();

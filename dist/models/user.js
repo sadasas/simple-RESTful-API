@@ -28,6 +28,7 @@ const userSchema = new mongoose_1.Schema({
     username: { type: String, required: true },
     password: { type: String, required: true },
 }, {
+    collection: "Users",
     versionKey: false,
 });
 exports.default = mongoose_1.default.model("user", userSchema);
